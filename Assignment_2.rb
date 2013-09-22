@@ -184,10 +184,29 @@ module Enumerable
  end
 end
 
-puts([3, 3, 1, 1].palindrome?())
+#puts([3, 3, 1, 1].palindrome?())
 
 
 #Part 4 - Blocks-----------------------------------------
 class CartesianProduct
- include Enumberable
+  include Enumerable
+  @collection_1
+  @collection_2
+  
+  def initialize(collection_1, collection_2)
+    @collection_1 = collection_1
+    @collection_2 = collection_2
+  end
 
+  def each
+    @collection_1.each do |n|
+     @collection_2.each do |m|
+      yield([n, m])
+     end
+    end  
+  end  
+
+end
+
+c = CartesianProduct.new([1, 2], [:a, :b])
+c.each { |elt| puts elt.inspect}
